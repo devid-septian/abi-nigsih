@@ -501,19 +501,15 @@
 	<script src="js/main.js"></script>
 
 	<script>
-    var d = new Date(new Date().getTime() + 104 * 120 * 120 * 2000);
+    var d = new Date(new Date().getTime() + 106 * 120 * 120 * 2000);
 
     // default example
-    // simplyCountdown('.simply-countdown-one', {
-    //     year: d.getFullYear(),
-    //     month: d.getMonth(),
-    //     day: d.getDate()
-    // });
-		$('.simply-countdown-one').simplyCountdown({
-        year: 2015, // required
-        month: 6, // required
-        day: 28 // required
+    simplyCountdown('.simply-countdown-one', {
+        year: d.getFullYear(),
+        month: d.getMonth(),
+        day: d.getDate()
     });
+
     //jQuery example
     $('#simply-countdown-losange').simplyCountdown({
         year: d.getFullYear(),
