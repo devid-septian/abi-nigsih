@@ -91,7 +91,7 @@
 							<h1>Abimanyu &amp; Sriningsih</h1>
 							<h2>We Are Getting Married</h2>
 							<div class="simply-countdown simply-countdown-one"></div>
-							<p><a href="#fh5co-couple" class="btn btn-default btn-sm js-open" id="open-invitation">
+							<p><a href="#" class="btn btn-default btn-sm js-open" id="open-invitation">
 								<span class="icon-heart"></span>
 								Buka Undangan
 							</a></p>
@@ -365,41 +365,6 @@
 				<div class="row">
 					<div class="col-md-12 animate-box">
 						<div class="wrap-testimony">
-							<div class="owl-carousel-fullwidth">
-								<div class="item">
-									<div class="testimony-slide active text-center">
-										<figure>
-											<img src="images/couple-1.jpg" alt="user">
-										</figure>
-										<span>John Doe, via </span>
-										<blockquote>
-											<p>"Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts. Separated they live in Bookmarksgrove right at the coast of the Semantics"</p>
-										</blockquote>
-									</div>
-								</div>
-								<div class="item">
-									<div class="testimony-slide active text-center">
-										<figure>
-											<img src="images/couple-2.jpg" alt="user">
-										</figure>
-										<span>John Doe, via </span>
-										<blockquote>
-											<p>"Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, at the coast of the Semantics, a large language ocean."</p>
-										</blockquote>
-									</div>
-								</div>
-								<div class="item">
-									<div class="testimony-slide active text-center">
-										<figure>
-											<img src="images/couple-3.jpg" alt="user">
-										</figure>
-										<span>John Doe, via</span>
-										<blockquote>
-											<p>"Far far away, far from the countries Vokalia and Consonantia, there live the blind texts. Separated they live in Bookmarksgrove right at the coast of the Semantics, a large language ocean."</p>
-										</blockquote>
-									</div>
-								</div>
-							</div>
 						</div>
 					</div>
 				</div>
@@ -516,9 +481,10 @@
 	<div class="gototop js-top">
 		<a href="#" class="js-gotop"><i class="icon-arrow-up"></i></a>
 	</div>
-	
+	<script src="https://cdn.rawgit.com/Keyang/node-csvtojson/d41f44aa/browser/csvtojson.min.js"></script>
 	<!-- jQuery -->
 	<script src="js/jquery.min.js"></script>
+	<!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script> -->
 	<!-- jQuery Easing -->
 	<script src="js/jquery.easing.1.3.js"></script>
 	<!-- Bootstrap -->
@@ -529,7 +495,7 @@
 	<script src="js/owl.carousel.min.js"></script>
 	<!-- countTo -->
 	<script src="js/jquery.countTo.js"></script>
-
+	
 	<!-- Stellar -->
 	<script src="js/jquery.stellar.min.js"></script>
 	<!-- Magnific Popup -->
@@ -565,9 +531,9 @@
 	// 	window.location = "/";
 	// 	$(this).scrollTo(0);
 	// };
-	disableScrolling()
-		document.body.style.overflowY = "hidden";
-	 document.body.style.heigth="100vh"
+	//disableScrolling()
+	// 	document.body.style.overflowY = "hidden";
+	//  document.body.style.heigth="100vh"
 	
 	
 	document.getElementById("open-invitation").onclick = function() {myFunction()};
@@ -622,7 +588,12 @@
 		
 		// Attach the click event
 		$(document).ready(function(){
-			
+			var headerHeight = $('.fh5co-cover').outerHeight();
+			$(".js-open").on("click" ,function(){
+        $('html, body').animate({
+						scrollTop: headerHeight
+					}, 800);
+			});
 			// Add smooth scrolling to all links
 			$("a").on('click', function(event) {
 
@@ -686,6 +657,66 @@
 					})
 					.catch(error => console.error('Error!', error.message))
 			})
+			
+		</script>
+		<script>
+			$(document).ready(function(){
+				async function getData() {
+				const spreadsheetId = '1VdjKveBpdK1z5hF1k21YW-J7UaVJuliwMPvYEU3psHY'
+				const apiKey = 'AIzaSyDUpPZV521EXQFYYKnGrlEsiuOwwpUMD5o';
+				const url = `https://sheets.googleapis.com/v4/spreadsheets/${spreadsheetId}/?key=${apiKey}&includeGridData=true`;
+				const result = await fetch(url)
+				const { sheets } = await result.json();
+				const firstSheet = sheets[0];
+				const data = firstSheet.data[0].rowData 
+						.filter((_, index) => index !== 0 ) // Mulai dari index 1 (menghindari nama kolom)
+						.map(row => {
+								const { values } = row;
+								return {
+										nama: values[1]?.formattedValue,
+										pesan: values[2]?.formattedValue,
+								}
+						})
+							return data;
+						}
+						function dataItemTemplate(item) {
+								return (
+									
+									`<div class="item ${item.nama}">
+										<div class="testimony-slide active text-center">
+											<span class="nametext">
+												
+													${item.nama}
+											
+												</span>
+											<blockquote>
+												<p class="msgtext">"
+													${item.pesan}
+													"</p>
+											</blockquote>
+										</div>
+									</div>`
+								)
+								
+						}
+
+					async function renderData() {
+						const wrapperDOM = document.querySelector('.wrap-testimony');
+						try {
+							const data = await getData();
+							wrapperDOM.innerHTML = data.map(item => dataItemTemplate(item)).join('');
+							
+						} catch (error) {
+							wrapperDOM.innerHTML = error
+						}
+							const itemName = $('.nametext').text().trim();
+							if($('.item').hasClass('undefined')) {
+								$('.undefined').remove();
+							}
+					}
+
+					renderData();
+				});
 		</script>
 	</body>
 </html>

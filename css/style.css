@@ -309,6 +309,7 @@ h1, h2, h3, h4, h5, h6, figure {
   min-height: 100vh;
   background-size: cover;
   background-repeat: no-repeat;
+  background-position: center;
   position: relative;
   width: 100%;
 }
@@ -1224,6 +1225,16 @@ form label {
 
 #fh5co-testimonial .wrap-testimony {
   position: relative;
+  width: 60%;
+  margin: 0 auto;
+  height: 500px;
+  overflow: auto;
+}
+#fh5co-testimonial .wrap-testimony .item {
+  background-color: #f5dbf5;
+  padding: 10px 20px;
+  border-radius: 10px;
+  margin-bottom: 15px;
 }
 #fh5co-testimonial .wrap-testimony .testimony-slide {
   text-align: center;
@@ -1248,6 +1259,7 @@ form label {
   width: 100px;
   height: 100px;
 }
+
 #fh5co-testimonial .wrap-testimony .testimony-slide figure img {
   width: 100px;
   height: 100px;
@@ -1258,8 +1270,8 @@ form label {
 }
 #fh5co-testimonial .wrap-testimony .testimony-slide blockquote {
   border: none;
-  margin: 30px auto;
-  width: 50%;
+  margin: 0px auto;
+  width: 100%;
   position: relative;
   -webkit-border-radius: 4px;
   -moz-border-radius: 4px;
