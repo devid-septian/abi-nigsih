@@ -34,6 +34,9 @@ body {
   overflow: hidden;
   position: absolute;
 }
+.cursor-pointer {
+  cursor: pointer;
+}
 .offcanvas #page:after {
   -webkit-transition: 2s;
   -o-transition: 2s;
@@ -1405,6 +1408,9 @@ form label {
 }
 #fh5co-started .form-inline .form-group .form-control {
   width: 100%;
+}
+#fh5co-started .form-inline label {
+  color: #ffffff;
 }
 #fh5co-started .fh5co-heading {
   margin-bottom: 30px;
