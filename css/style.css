@@ -1176,6 +1176,9 @@ form label {
     margin-left: 0;
     margin-right: 0;
   }
+  .couple-half {
+    margin-bottom: 20px;
+  }
   .couple-half .desc-groom {
     padding-right: 0;
     text-align: center;
@@ -1715,7 +1718,7 @@ form label {
 }
 @media screen and (max-width: 768px) {
   .fh5co-nav-toggle {
-    display: block;
+    display: none;
   }
 }
 
